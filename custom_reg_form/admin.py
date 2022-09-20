@@ -7,18 +7,18 @@ from io import StringIO
 
 class ExtraInfoAdmin(admin.ModelAdmin):
     actions = ['download_csv'] 
-    list_display = ('user', 'nationality', 'age', 'phone_number',)
-    list_display_links = ('user', 'nationality', 'age', 'phone_number',)
+    list_display = ('user', 'day_of_birth', 'month_of_birth', 'country_of_origin', 'country_codes', 'phone_number',)
+    list_display_links = ('user', 'day_of_birth', 'month_of_birth', 'country_of_origin', 'country_codes', 'phone_number',)
     list_filter = ('user',)
-    search_fields = ('user', 'nationality', 'age', 'phone_number',)
+    search_fields = ('user', 'day_of_birth', 'month_of_birth', 'country_of_origin', 'country_codes', 'phone_number',) #, 'date_of_birth'
     list_per_page = 25  
     def download_csv(self, request, queryset,*args, **kwargs):
         import csv
         f = open('some.csv', 'w')
         writer = csv.writer(f)
-        writer.writerow(['user', 'nationality', 'age', 'phone_number',])
+        writer.writerow(['user', 'day_of_birth', 'month_of_birth', 'country_of_origin', 'country_codes', 'phone_number',])
         for s in queryset:
-            writer.writerow([s.user, s.nationality, s.age, s.phone_number])
+            writer.writerow([s.user, s.day_of_birth, s.month_of_birth, s.country_of_origin, s.country_codes, s.phone_number])
         
         f.close()
         f = open('some.csv', 'r')
